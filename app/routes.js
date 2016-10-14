@@ -60,7 +60,7 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
 
-       childRoutes: [HomePageViewRoute],
+      childRoutes: [HomePageViewRoute],
      }, {
       path: '*',
       name: 'notfound',
