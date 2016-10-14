@@ -11,11 +11,7 @@ import Helmet from 'react-helmet';
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
 import 'sanitize.css/sanitize.css';
-
-import Img from 'components/Img';
-import Footer from 'components/Footer';
-import Banner from './banner-metal.jpg';
-import A from 'components/A';
+import 'antd-mobile/dist/antd-mobile.css';
 
 import styles from './styles.css';
 
@@ -29,11 +25,12 @@ function App(props) {
           { name: 'description', content: 'A React.js Boilerplate application' },
         ]}
       />
+      {/*
       <A className={styles.logoWrapper} href="https://twitter.com/mxstbr">
         <Img className={styles.logo} src={Banner} alt="react-boilerplate - Logo" />
       </A>
+      */}
       {React.Children.toArray(props.children)}
-      <Footer />
     </div>
   );
 }
