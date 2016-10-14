@@ -12,7 +12,7 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import styles from './styles.css';
 
-import StickyFooter from 'components/StickyFooter';
+import StickyFooter from 'containers/StickyFooter';
 
 export class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
