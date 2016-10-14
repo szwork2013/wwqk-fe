@@ -37,6 +37,28 @@ export default function createRoutes(store) {
     },
   };
 
+  const CartPageViewRoute = {
+    path: '/cart',
+    name: 'cartPageView',
+    getComponent(nextState, cb) {
+      const importModules = Promise.all([
+        System.import('containers/CartPageView/reducer'),
+        System.import('containers/CartPageView/sagas'),
+        System.import('containers/CartPageView'),
+      ]);
+
+      const renderRoute = loadModule(cb);
+
+      importModules.then(([reducer, sagas, component]) => {
+        injectReducer('cartPageView', reducer.default);
+        injectSagas(sagas.default);
+        renderRoute(component);
+      });
+
+      importModules.catch(errorLoading);
+    },
+  };
+
   return [
     {
       path: '/',
@@ -60,6 +82,8 @@ export default function createRoutes(store) {
       },
 
       indexRoute: HomePageViewRoute,
+
+      childRoutes: [CartPageViewRoute]
      }, {
       path: '*',
       name: 'notfound',
