@@ -16,8 +16,30 @@ export default function createRoutes(store) {
   // create reusable async injectors using getAsyncInjectors factory
   const { injectReducer, injectSagas } = getAsyncInjectors(store);
 
+  const HomePageViewRoute = {
+    path: '/home',
+    name: 'homePageView',
+    getComponent(nextState, cb) {
+      const importModules = Promise.all([
+        System.import('containers/HomePageView/reducer'),
+        System.import('containers/HomePageView/sagas'),
+        System.import('containers/HomePageView'),
+      ]);
+
+      const renderRoute = loadModule(cb);
+
+      importModules.then(([reducer, sagas, component]) => {
+        injectReducer('homePageView', reducer.default);
+        injectSagas(sagas.default);
+        renderRoute(component);
+      });
+
+      importModules.catch(errorLoading);
+    },
+  };
+
   return [
-     {
+    {
       path: '/',
       name: 'homePage',
       getComponent(nextState, cb) {
@@ -37,7 +59,9 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading);
       },
-    }, {
+
+       childRoutes: [HomePageViewRoute],
+     }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
