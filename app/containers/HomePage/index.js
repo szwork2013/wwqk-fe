@@ -24,7 +24,7 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
             { name: 'description', content: 'Description of HomePage' },
           ]}
         />
-        <StickyFooter />
+        <StickyFooter/>
       </div>
     );
   }
