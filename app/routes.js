@@ -17,7 +17,6 @@ export default function createRoutes(store) {
   const { injectReducer, injectSagas } = getAsyncInjectors(store);
 
   const HomePageViewRoute = {
-    path: '/home',
     name: 'homePageView',
     getComponent(nextState, cb) {
       const importModules = Promise.all([
@@ -60,7 +59,7 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
 
-      childRoutes: [HomePageViewRoute],
+      indexRoute: HomePageViewRoute,
      }, {
       path: '*',
       name: 'notfound',
