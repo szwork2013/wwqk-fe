@@ -5,6 +5,7 @@
 */
 
 import React from 'react';
+import { withRouter } from 'react-router';
 
 import styles from './styles.css';
 import './styles.less';
@@ -38,6 +39,7 @@ class StickyFooter extends React.Component { // eslint-disable-line react/prefer
               this.setState({
                 selectedTab: 'homeTab',
               });
+              this.props.router.push('/')
             }}
           >
           </TabBar.Item>
@@ -51,6 +53,7 @@ class StickyFooter extends React.Component { // eslint-disable-line react/prefer
               this.setState({
                 selectedTab: 'cartTab',
               });
+              this.props.router.push('/cart')
             }}
           >
           </TabBar.Item>
@@ -64,6 +67,7 @@ class StickyFooter extends React.Component { // eslint-disable-line react/prefer
               this.setState({
                 selectedTab: 'accountTab',
               });
+              this.props.router.push('/account')
             }}
           >
           </TabBar.Item>
@@ -74,4 +78,8 @@ class StickyFooter extends React.Component { // eslint-disable-line react/prefer
   }
 }
 
-export default StickyFooter;
+StickyFooter.contextTypes = {
+  store: React.PropTypes.object,
+};
+
+export default withRouter(StickyFooter);
